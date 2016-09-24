@@ -43,6 +43,18 @@ or
 2. key：只能为String类型，其他输入返回false。
 3. value：传入null或undefined的时，返回null。
 
+### storage(type).length
+```js
+	 /**
+	 * 获取Storage中数据的容量
+	 * @param type[String](session/local)  指定要获取容量的Storage类型
+	 * @return [Number]                    返回容量大小
+	 * */
+	 storage(type).length
+	eg:
+		storage('session').length;
+```
+
 ### storage.remove(type,key)
 ```js
 	 /**
@@ -58,3 +70,35 @@ or
 **说明**
 
 删除不会有任何提示，删除时请注意，或者你可以在原方法中添加你需要的返回信息。
+
+### storage.set(type,obj)
+```js
+	 /**
+	 * 添加多条数据到Storage
+	 * @param type[String](session/local)  指定要添加的Storage类型
+	 * @param obj[JSON格式]                待添加的JSON格式数据
+	 * @return [Boolean]
+	 * */
+	 storage.set(type,obj)
+	eg:
+		storage.set('session',{"a",123,"b":true});
+```
+**说明**
+
++ obj必须为json格式的数据，如果仅想添加一条数据建议使用storage()方法。
+
+### storage.get(type,obj)
+```js
+	 /**
+	 * 获取多条数据
+	 * @param type[String](session/local)  指定要获取的Storage类型
+	 * @param obj[Array]                   待获取的数据名称数组
+	 * @return [Object]                    返回JSON格式数组或者null
+	 * */
+	 storage.get(type,obj)
+	eg:
+		storage.get('session',["a","b"]);
+```
+**说明**
+
++ obj数组每一项必须为String类型的key。

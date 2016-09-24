@@ -47,12 +47,33 @@
 		console.log(storage('session'));//false
 		console.groupEnd();
 
-		//4.测试删除功能和清除功能测试
+		//4.删除功能和清除功能测试
 		console.group('removeOrClear');
 		console.log(storage.remove('local','3'));//true
 		console.log(storage.remove('session','3'));//true
 		console.log(storage.remove('session'));//true
 		console.groupEnd();
+
+		//5.set方法测试
+		console.group('set()');
+		console.log(storage.set('session',{a:function fn(){}}));//true,但不符合JSON要求
+		console.log(storage.set('session',{"b":123,c:false}));//true
+		console.log(storage.set('session',{"d":[1,2]}));//true
+		console.log(storage.set('session',{"d":{}}));//true
+		console.log(storage.set('session',{"e":{"a":1,"c":2}}));//true
+		console.groupEnd();
+
+		//6.get方法测试
+		console.group('get()');
+		console.log(storage.get('session',["a","b"]));//true
+		console.groupEnd();
+
+		//7.length属性测试
+		console.group('length');
+		console.log(storage('session').length);//
+		console.log(storage('local').length);//
+		console.groupEnd();
+
 
 	</script>
 </body>
