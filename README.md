@@ -9,14 +9,14 @@
 
 ## 使用
 
-```
+```html
 <script type="text/javascript" src="scripts/Storage.js"></script>
 <script>
 	storage('session','test','123');
 </script>
 ```
 or
-```
+```js
 	var storage = require('Storage.js');
 	storage.getOrSetStorage('session','test','123');
 ```
@@ -24,7 +24,7 @@ or
 ## 本地存储APIs
 ### storage(type,key,value)
 
-```
+```js
 	/**
 	 * 添加、修改、获取指定的Storage中的数据
 	 * @param type[String](session/local)  指定要存储的Storage类型
@@ -43,7 +43,7 @@ or
 3. value：传入null或undefined的时，返回null。
 
 ### storage.remove(type,key)
-```
+```js
 	 /**
 	 * 删除一个或清空Storage中的数据
 	 * @param type[String](session/local)  指定要删除或者清空的Storage类型
