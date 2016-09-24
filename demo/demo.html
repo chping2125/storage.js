@@ -7,7 +7,53 @@
 <body>
 	<script type="text/javascript" src="../scripts/Storage.js"></script>
 	<script>
-		storage.getOrSetStorage('session','aaa',123);
+		//1.参数一测试
+		console.group('argument[0]');
+		console.log(storage('session','1','1'));//true
+		console.log(storage('local','1','1'));//true
+		console.log(storage('','1','1'));//false
+		console.log(storage(null,'1','1'));//false
+		console.log(storage(undefined,'1','1'));//false
+		console.groupEnd();
+
+		//2.参数二测试
+		console.group('argument[1]');
+		console.log(storage('session','2','1'));//true
+		console.log(storage('session',2,'1'));//false
+		console.log(storage('session',true,'1'));//false
+		console.log(storage('session',null,'1'));//false
+		console.log(storage('session',undefined,'1'));//false
+		console.groupEnd();
+
+		//3.储存功能测试和修改功能
+		console.group('savaOrEdit');
+		console.log(storage('session','3','1'));//true
+		console.log(storage('session','3',0));//true
+		console.log(storage('session','3',1));//true
+		console.log(storage('session','3',true));//true
+		console.log(storage('session','3',false));//true
+		console.log(storage('session','4',undefined));//null
+		console.log(storage('session','5',null));//null
+		console.log(storage('session','3',{}));//true
+		console.log(storage('session','3',{"json":"json"}));//true
+		console.log(storage('session','3',[]));//true
+		console.log(storage('session','3',['a',1,false]));//true
+		console.groupEnd();
+
+		//4.获取功能测试
+		console.group('get');
+		console.log(storage('local','3'));//null
+		console.log(storage('session','3'));//['a',1,false]
+		console.log(storage('session'));//false
+		console.groupEnd();
+
+		//4.测试删除功能和清除功能测试
+		console.group('removeOrClear');
+		console.log(storage.remove('local','3'));//true
+		console.log(storage.remove('session','3'));//true
+		console.log(storage.remove('session'));//true
+		console.groupEnd();
+
 	</script>
 </body>
 </html>

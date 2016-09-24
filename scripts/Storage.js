@@ -17,120 +17,55 @@
         g.storage = fn();
     }
 })(function() {
-	storage = {
-		"getOrSetStorage":  getOrSetStorage,
-		"clearStorage": clearStorage
+	if (!window.localStorage) return;
+	var storage = {};
+	function serialize(value){
+	  return JSON.stringify({"value":value});
 	}
-	return storage;
-
-	/**
-	 * 添加、修改、获取指定session/local的Storage中的数据
-	 * @param type[String](session/local)       指定要存储为sessionStorage/localStorage
-	 * @param key[String]                       待添加、修改、获取的Storage的key值
-	 * @param value[all Type]                   待添加、修改的Storage的value值,缺省时为获取数据
-	 * @return [Boolean/value]                  添加、修改返回Boolean,获取返回value值
-	 **/
-	function getOrSetStorage(type,key,value){
-	  //检查兼容性
-	  var storage = checkoutStorage(type)
-	  if(storage != null){
-	    if(value != undefined){
-	      //存一个值，或者改一个值
-	      storage.setItem(key,addTagToValue(value));
-	      if(storage.getItem(key) != null){
-	        return true;
-	      }else{
-	        return false;
-	      }
-	    }else{
-	      //取一个值
-	      var obj = JSON.parse(storage.getItem(key));
-	      //防止为空(当value传参为null的时候，key存在，但是Strong中不存在该数据，返回null)
-	      if(obj!=null){
-	        return obj.value;
-	      }
-	    }
+	function checkStorage(type){
+	  if(type === 'session'){
+	  	return window.sessionStorage || null;
+	  }else if(type === 'local'){
+	  	return window.localStorage || null;
 	  }else{
-	    return false;
-	  }
-	}
-
-
-	/**
-	 * 删除一个或多个Storage中的数据
-	 * @param type[String](session/local)       指定要存储为sessionStorage/localStorage
-	 * @param key[String]                       待删除的Storage的key值，缺省时为清空所有Storage
-	 * @return [Boolean]
-	 * */
-	function clearStorage(type,key){
-	  //检查兼容性
-	  var storage = checkoutStorage(type)
-	  if(storage != null){
-	    if(key != undefined){
-	      var flag = storage.getItem(key);
-	      if(flag !=null){
-	        //当要删除兑现存在的时候继续执行
-	        if(confirm('你确定要删除当前同源路径下的'+type+'Storage的'+key+'数据吗？')){
-	          storage.removeItem(key);
-	          if(storage.getItem(key) == null){
-	            return true;
-	          }else{
-	            //删除不成功回调继续删除
-	            clearStorage(type,key);
-	          }
-	        }
-	      }else{
-	        return true;
-	      }
-	    }else{
-	      var flag = storage.getItem(key);
-	      if(flag !=null){
-	        if(confirm('你确定要删除所有当前同源路径下的'+type+'Storage的数据吗？')){
-	          storage.clear();
-	          if(storage.length == 0){
-	            return true;
-	          }else{
-	            //删除不成功回调继续删除
-	            clearStorage(type,key);
-	          }
-	        }
-	      }else{
-	        return true;
-	      }
-	    }
-	  }else{
-	    return false;
-	  }
-	}
-
-	function addTagToValue(value){
-	  var tag = Object.prototype.toString.call(value).slice(8,-1);
-	  var newObj = {
-	    "tag":tag,//这里存不存tag没有什么作用
-	    "value":value
-	  }
-	  return JSON.stringify(newObj);
-	}
-
-	function checkoutStorage(type){
-	  if(type == 'session'){
-	    if(window.sessionStorage){
-	      return window.sessionStorage;
-	    }else{
-	      console.log('Your Browser Not Support '+type+'Storage');
-	      return  null;
-	    }
-	  }else if(type == 'local'){
-	    if(window.localStorage){
-	      return  window.localStorage;
-	    }else{
-	      console.log('Your Browser Not Support '+type+'Storage');
-	      return  null;
-	    }
-	  }else{
-	    console.log('No '+type+'Storage Object');
 	    return  null;
 	  }
 	}
+	storage = function(type,key,value){
+		var storage = checkStorage(type);
+		if(storage != null&&typeof key === 'string'){
+		    if(value != undefined){
+		      	storage.setItem(key,serialize(value));
+		      	return storage.getItem(key)?true:false;
+		    }else{
+		      	var obj = JSON.parse(storage.getItem(key));
+		      	return obj?obj.value:null;
+		    }
+	  	}else{
+	    	return false;
+	  	}
+	}
+	storage.prototype={
+		remove:function(type,key){
+		  var storage = checkStorage(type);
+		  if(storage != null){
+		    if(key && typeof key === 'string'){
+		      	var str = storage.getItem(key);
+		      	if(str != null){
+		          	storage.removeItem(key);
+		          	return storage.getItem(key)?clearStorage(type,key):true;
+		      	}else{
+		        	return true;
+		      	}
+		    }else{
+          		storage.clear();
+          		return storage.length == 0?true:clearStorage(type,key);
+		    }
+		  }else{
+		    return false;
+		  }
+		}	
+	} 
+	for (var a in storage.prototype) storage[a] = storage.prototype[a];
+	return storage;
 });
-
