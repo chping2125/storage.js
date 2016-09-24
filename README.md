@@ -38,6 +38,7 @@ or
 		storage('session','test','123');
 ```
 **说明**
+
 1. type：指定Stroage的类型为sessionStorage/localStorage时出入“session”/"local",其他输入返回false。
 2. key：只能为String类型，其他输入返回false。
 3. value：传入null或undefined的时，返回null。
@@ -55,6 +56,5 @@ or
 		storage.remove('session','test');
 ```
 **说明**
-1. type：指定Stroage的类型为sessionStorage/localStorage时出入“session”/"local",其他输入返回null。
-2. key：只能为String类型，其他输入返回false。
-3. value：传入null或undefined的时，返回null。
+
+删除不会有任何提示，删除时请注意，或者你可以在原方法中添加你需要的返回信息。
