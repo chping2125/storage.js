@@ -5,5 +5,5 @@
 ##下载
 
 1. Fork到你的Git仓库，然后检出到你本地即可。
-2. 点击这里，下载[ZIP压缩版](storage.js/archive/master.zip)
+2. 点击这里，下载[ZIP压缩版](../../archive/master.zip)
 
