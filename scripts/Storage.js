@@ -62,7 +62,6 @@
 				if(isJSON(obj)){
 					for(var att in obj){
 						storage.setItem(att,serialize(obj[att]));
-						//storage.getItem(att)? continue :this.set(type,obj);
 					}
 					return true;
 				}else{
@@ -84,7 +83,7 @@
 					});
 					return arr;
 				}else{
-					return null;
+					return typeof obj === 'string'?JSON.parse(storage.getItem(obj)).value:null
 				}
 			}else{
 				return null;
@@ -109,7 +108,11 @@
 		    return false;
 		  }
 		},
-		length:this.length
+		length:this.length,
+		has:function(type,key){
+			var storage = checkStorage(type);
+			return storage?storage.hasOwnProperty(key):false;
+		}
 	} 
 	for (var a in storage.prototype) storage[a] = storage.prototype[a];
 	return storage;

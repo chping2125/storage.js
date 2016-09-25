@@ -102,3 +102,17 @@ or
 **说明**
 
 + obj数组每一项必须为String类型的key。
++ obj也可以为String类型，表示获取单个Storage数据，功能同storage(type,key);
+
+### storage.has(type,key)
+```js
+	 /**
+	 * 判断指定Storage有无指定值
+	 * @param type[String](session/local)  指定要获取的Storage类型
+	 * @param key[String]                  待判断数据的key
+	 * @return [Boolean]                    
+	 * */
+	 storage.has(type,obj)
+	eg:
+		storage.has('session','a');
+```
