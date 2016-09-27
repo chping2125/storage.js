@@ -1,6 +1,6 @@
 {
   "name": "storage.js_chping",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "本地储存Storage的封装，提供简单API",
   "main": "./scripts/storage.js",
   "scripts": {
