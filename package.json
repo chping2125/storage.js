@@ -1,0 +1,25 @@
+{
+  "name": "storage.js_chping",
+  "version": "1.0.0",
+  "description": "本地储存Storage的封装，提供简单API",
+  "main": "./scripts/storage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chping2125/storage.js.git"
+  },
+  "keywords": [
+    "storage\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D[\u001b[C\u001b[C\u001b[C\u001b[C''\u001b[Dstorage'",
+    "'localStorage'",
+    "'sessionStorage'",
+    "'本地储存��']"
+  ],
+  "author": "chping",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chping2125/storage.js/issues"
+  },
+  "homepage": "https://github.com/chping2125/storage.js#readme"
+}

@@ -1,3 +1,11 @@
+/*!
+ * storage.js v1.0.0
+ * Local storage localStorage & sessionStorage package provides a simple API
+ * 
+ * Copyright (c) 2016 chping <chping_2125@163.com>
+ * 
+ * Licensed under the MIT license.
+ */
 (function(fn) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = fn();
