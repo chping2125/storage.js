@@ -1,5 +1,8 @@
 # Storage.js
 
+[![GitHub issues](https://img.shields.io/github/issues/chping2125/storage.js.svg)](https://github.com/chping2125/storage.js/issues) [![GitHub forks](https://img.shields.io/github/forks/chping2125/storage.js.svg)](https://github.com/chping2125/storage.js/network) [![GitHub stars](https://img.shields.io/github/stars/chping2125/storage.js.svg)](https://github.com/chping2125/storage.js/stargazers) [![](https://img.shields.io/github/release/chping2125/storage.js.svg)](https://github.com/chping2125/storage.js/releases) [![](https://chping2125.github.io/sb/ico/npm.svg)](https://www.npmjs.com/package/storage.js_chping)
+
+
 本地存储Storage的封装，提供方便的API
 
 ## 下载
